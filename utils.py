@@ -48,7 +48,7 @@ def duplicate_error_check(df):
         inplace=True,
     )
 
-    for i in range(len(df)):
+    for i in range(len(df)): 
         # Check if there are any duplicates.
         if pd.Series(df.iloc[i] == df.iloc[i].shift()).any():
             duplicates = set(
