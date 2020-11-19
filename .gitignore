@@ -130,3 +130,6 @@ stock_prices.csv
 keystats.csv
 stock_prices_avg.csv
 Untitled.ipynb
+*.hyper
+*.twbr
+~Backtest__12904.twbr
