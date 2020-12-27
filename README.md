@@ -1,5 +1,11 @@
 # Stock Trading Strategy
 
+### Data Source:
+
+Fundamentals Data: Quandl (https://www.quandl.com/databases/SF1/documentation)
+
+Stock Price: Yahoo Finance (https://finance.yahoo.com/)
+
 ## I. Background
 
 From early 2020, the COVID-19 outbreak has disrupted the entire retail brokerage and investment industry and ways of working, in a manner we have not expected previously. Amid the stay-at-home order, stimulus packages issued by the government, and zero commission fees across most of the trading platforms, multitudes of younger investors jumped into the stock market. The impact of the new generation of retail traders has started to play a role in the directional flow of the stock market in the United States. Major stock trading platforms have reported record growth of both new funded accounts and daily average revenue trades (DARTs) in 2020. Robinhood, one of the leading investing apps announced that three million new customer accounts were added in the first quarter and there were 4.3 million DARTs in June. Yet the younger generation, many of them first-time investors, are not well-educated in investment, and sometimes arbitrary. Reading financial indicators, tracking events, and evaluating a company’s performance can be overwhelming. Under this situation, the team intended to develop a framework that takes advantage of quantamental analysis to help first-time investors make wise investment decisions.
