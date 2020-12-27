@@ -1,12 +1,12 @@
 # Stock Trading Strategy
 
-##I. Background
+## I. Background
 
 From early 2020, the COVID-19 outbreak has disrupted the entire retail brokerage and investment industry and ways of working, in a manner we have not expected previously. Amid the stay-at-home order, stimulus packages issued by the government, and zero commission fees across most of the trading platforms, multitudes of younger investors jumped into the stock market. The impact of the new generation of retail traders has started to play a role in the directional flow of the stock market in the United States. Major stock trading platforms have reported record growth of both new funded accounts and daily average revenue trades (DARTs) in 2020. Robinhood, one of the leading investing apps announced that three million new customer accounts were added in the first quarter and there were 4.3 million DARTs in June. Yet the younger generation, many of them first-time investors, are not well-educated in investment, and sometimes arbitrary. Reading financial indicators, tracking events, and evaluating a company’s performance can be overwhelming. Under this situation, the team intended to develop a framework that takes advantage of quantamental analysis to help first-time investors make wise investment decisions.
 
-##II. Methodology
+## II. Methodology
 
-###A. Quantamental Analysis
+### A. Quantamental Analysis
 
 Quantamental combines two types of investment strategies- quantitative and fundamental, where the two are both mainstream approaches that investment firms rely on. The former focuses on statistical methods and data analytics to track the price movements based on current and historical trading data, while the latter involves studying financial indicators to evaluate the growth of a stock. However, both types of analysis have limitations and weaknesses when performed in isolation. According to a study of 4000 hedge funds by Aurum, quantamental strategies achieved an average rate of return of 14.06% in 2019, compared to 4.46% for quantitative strategies and 9.61% for fundamental-only strategies. Therefore, given the strong potential, quantamental analysis serves as the backbone of the project.
 
@@ -14,13 +14,13 @@ Quantamental combines two types of investment strategies- quantitative and funda
 
 Machine learning is one of the favorable analytical tools in the fintech industry with its predictive power and ability to decision making. In this project, the team has implemented supervised learning methods to predict future stock returns and then to construct a portfolio based on stocks’ fundamentals.
 
-###C. Optimization
+### C. Optimization
 
 The team applies two modern optimization approaches to assign weights to the portfolio in order to maximize the expected return in a trading period- Monte Carlo Simulation and Nelder-Mead Simplex Algorithm.
 
 ## III. Stage One - Portfolio Construction
 
-###A. Data Cleaning
+### A. Data Cleaning
 
 The raw data is extracted from Quandl and Yahoo Finance. The data from Quandl stores over 5,000 companies’ 109 quarterly financial indicators in ten years, between 3/31/2010 and 3/31/2020. The data from Yahoo Finance records the prices of 2,734 stocks of each trading day between 3/31/2010 and 11/11/2020. The sample data from both sources is displayed below (Fig.1 and Fig.2).
 
@@ -71,7 +71,7 @@ Based on the stock price data, the team first calculates the mean return of each
 
 Fig.3 Summary of the Cleaned Dataset
 
-###B. Random Forest & Portfolio Creation
+### B. Random Forest & Portfolio Creation
 
 The team has performed four classification algorithms including Random Forest, Logistic Regression, Ridge Regression, Support Vector Machine (SVM), and Random Forest provides the best performance among the four classifiers. Random Forest can be considered as an improved version of single classification trees by growing a number of trees on bootstrapped training samples. The approach has three main advantages: First, it provides higher accuracy than single decision trees with low bias and moderate variance. Second, it has the power to analyze a large dataset with higher dimensionality. Third, it is easy to view the relative importance it assigns to the input features. In terms of our Random Forest results, the accuracy score is as high as 0.98, the precision score is 0.83, and the RMSE is only 0.13. As seen in Fig.4, almost every fundamental factor we select is important, especially the Price-to-Sale ratio and Price-to-Book ratio. It seems that the Dividend Yield contributes not too much to the prediction and this may result from a large majority of the public traded companies not offering a dividend to the investors. 
 
@@ -91,7 +91,7 @@ Table.2 Portfolio of the Five Companies
 
 In the 10-year period, our portfolio’s mean return is 19.5%. Compared to the mean return of 1.4% for the S&P 500 index, our strategy earns 18.1% more.
 
-##IV. Stage Two - Portfolio Optimization
+## IV. Stage Two - Portfolio Optimization
 
 The team now has five stocks selected from the stage one to build up the portfolio. First, we calculate the mean weekly return of each stock based on the historical data. Then, use log return to calculate sharpe ratio. Finally, maximize the sharpe ratio to achieve portfolio optimization.
 
@@ -101,7 +101,7 @@ Developed by Willian Sharpe, sharpe ratio is one of the most universal risk/retu
 
 Fig.5 Sharpe Ratio Formula
 
-###A. Method 1: Monte Carlo Simulation
+### A. Method 1: Monte Carlo Simulation
 
 In this method, we randomly assigned weights to the five stocks, and found one that gives us the best Sharpe Ratio. By doing so, we randomly assign weights to stocks in our portfolio, and then calculate the weekly return. This allows us to calculate the Sharpe Ratio for many randomly selected allocations. Then plot the allocation on a chart (Fig.6) that displays the expected return vs. the volatility, colored by Sharpe Ratio. All the points are sharpe ratio. The optimal sharpe ratio is the one we are using to achieve portfolio optimization.
 
@@ -111,17 +111,17 @@ Random trying gives us a clear view and better understanding of the relationship
 
 Fig.6 Monte Carlo Simulation Output
 
-###B. Method 2:Nelder-Mead Simplex algorithm
+### B. Method 2:Nelder-Mead Simplex algorithm
 
 The idea of Nelder-Mead Simplex algorithm in portfolio optimization is to minimize the negative Sharpe Ratio, in another way, to maximize the sharpe ratio. In particular, we are using SciPy’s built-in optimization algorithm to calculate the optimal weight for portfolio allocation, optimized for sharpe ratio. The scipy.optimize package provides several commonly used optimization algorithms. The one we are applying is Nelder-Mead Simplex algorithm, which is a commonly applied numerical method used to find the minimum or maximum of an objective function in a multidimensional space.
 
 We first define a function to calculate return, volatility, and the sharpe ratio. Before using SciPy’s algorithm, we need to define a function to get a negative sharpe ratio, adding constraint to weights which range from 0 to 1.Finally, just call the method “ minimize” and get the optimal results. 
 
-##V. Stage Three - Backtesting
+## V. Stage Three - Backtesting
 
 Backtesting is an excellent way to check the validity of a trading model. By bringing in historical data into the model, we can test the model and understand the model's performance in the given historical period. The backtesting steps are as follows: set backtesting period, specify backtesting strategy, set initial fund and trading day, set a benchmark and run backtesting, display and visualize backtesting performance.
 
-###A. Set Backtesting Period
+### A. Set Backtesting Period
 
 The team set the starting date of the backtesting as July 25, 2019, and the ending date as November 10, 2020.
 
@@ -188,7 +188,7 @@ Fig.8 Selected Five Stocks Value
 
 Fig.9 Changes of Assigned Weights in Backtesting Period
 
-##VI. **Stage Four - Live Trading** 
+## VI. **Stage Four - Live Trading** 
 
 The live trading on Robinhood started from November 20 to December 10, with an initial amount of \$10,000. The stocks and its holding amounts follow with the results of backtests. The trading frequency is weekly on every Tuesday, one hour before market close, the team calculates a new weight of each stock, then buys and sells the related stocks on Robinhood. At the noon of December 10, the total value of the portfolio is \$14,206.29, bringing a return of ​\$4206.29, the annualized return rate is 452%. The max drawdown is 10%. The strategy missed some stock rising period due to the weekly trading frequency, which exposes one drawback of this strategy that can not catch some rapid stock price change. The screenshot of Robinhood is shown in Fig.10
 
@@ -196,23 +196,23 @@ The live trading on Robinhood started from November 20 to December 10, with an i
 
 Fig.10 Live Trading Screenshot from Robinhood
 
-##VII. **Conclusion**
+## VII. **Conclusion**
 
-###A. **Decision**
+### A. **Decision**
 
 The team developed a stock trading strategy framework that provides quarterly stock selection based on stock fundamental data, portfolio stock weight optimization, portfolio backtesting and return analysis. The framework is flexible to apply at any stock trading platform and proved profitable at a 20-day live trading test.
 
-###B. **Limitation**
+### B. **Limitation**
 
 The stock selection model using the fundamental data from the stock quarterly report. Compared with the stock price fluctuations, the fundamental data can better reflect the company’s true performance of profitability. But the stock selection has two major limitations, one is the portfolio return is tied to the performance of selected stock in a whole quarter. The other one is the stock selection can not track the newly IPO stock, since those stocks do not release their quarterly report. The backtest framework does not take dividends and possible stock splits into account.
 
-###C. **Takeaway**
+### C. **Takeaway**
 
 One alternative approach for stock selection is to switch the data from fundamental data to price and volume-based information to build the model. One considerable limitation would be low data variables, there is a method to ease the concern is to create reasonable indexes such as 5-day average price data. By using the daily-update, price-based stock data, the stock selection model can involve more powerful models like Long Short-Term Memory models in the deep learning field for better prediction results. Furthermore, more assets like Bitcoin or ETF become trackable and add into the portfolio. Finally, the trading frequency is mandatory once a week. By adjusting the trading frequency based on backtesting results could lead to a different return.
 
 
 
-##**References**
+## **References**
 
 1. Zhong, X., & Enke, D. (2017). A comprehensive cluster and classification mining procedure for daily stock market return forecasting. Neurocomputing, 267, 152-168. doi:10.1016/j.neucom.2017.06.010
 
